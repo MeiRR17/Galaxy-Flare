@@ -16,6 +16,9 @@ x = 100
 
 #importing an image
 player = pygame.image.load('../img/player.png').convert_alpha()
+player_border = player.get_frect()
+player_border.center = (WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2)
+player_direction = 1
 stars = pygame.image.load('../img/stars.png').convert_alpha()
 galaxy = pygame.image.load('../img/galaxy.png').convert_alpha()
 sun = pygame.image.load('../img/sun.png').convert_alpha()
@@ -23,7 +26,14 @@ lightStar1 = pygame.image.load('../img/lightStar1.png').convert_alpha()
 lightStar2 = pygame.image.load('../img/lightStar2.png').convert_alpha()
 space = pygame.image.load('../img/space.png').convert_alpha()
 
-player = pygame.transform.scale(player, (100/1.8, 145/1.8))
+meteor = pygame.image.load('../img/meteor.png').convert_alpha()
+meteor_border = meteor.get_rect()
+meteor_border.center = (WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2)
+
+laser = pygame.image.load('../img/laser.png').convert_alpha()
+laser_border = laser.get_rect()
+laser_border.bottomleft = (20, WINDOW_HEIGHT / 2)
+
 stars = pygame.transform.scale(stars, (200, 200))
 galaxy = pygame.transform.scale(galaxy, (WINDOW_WIDTH, WINDOW_HEIGHT))
 sun = pygame.transform.scale(sun, (100, 100))
@@ -62,7 +72,11 @@ while running:
         display.blit(lightStar1, pos)
     for pos in ls2_positions:
         display.blit(lightStar2, pos)
-    display.blit(player, (x, 0))
+
+    player_border.x += player_direction * 0.4
+    if player_border.right > WINDOW_WIDTH or player_border.left < 0:
+        player_direction *= -1
+    display.blit(player, player_border)
 
     pygame.display.update()
 
