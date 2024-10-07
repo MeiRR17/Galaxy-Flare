@@ -26,6 +26,7 @@ lightStar2 = pygame.image.load('../img/lightStar2.png').convert_alpha()
 space = pygame.image.load('../img/space.png').convert_alpha()
 
 meteor = pygame.image.load('../img/meteors/m1.png').convert_alpha()
+
 meteor_border = meteor.get_rect()
 meteor_border.center = (WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2)
 
