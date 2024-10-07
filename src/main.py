@@ -12,7 +12,6 @@ running = True
 #surface
 sur = pygame.Surface((100, 200))
 sur.fill('orange')
-x = 100
 
 #importing an image
 player = pygame.image.load('../img/player.png').convert_alpha()
@@ -26,7 +25,7 @@ lightStar1 = pygame.image.load('../img/lightStar1.png').convert_alpha()
 lightStar2 = pygame.image.load('../img/lightStar2.png').convert_alpha()
 space = pygame.image.load('../img/space.png').convert_alpha()
 
-meteor = pygame.image.load('../img/meteor.png').convert_alpha()
+meteor = pygame.image.load('../img/meteors/m1.png').convert_alpha()
 meteor_border = meteor.get_rect()
 meteor_border.center = (WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2)
 
@@ -72,8 +71,10 @@ while running:
         display.blit(lightStar1, pos)
     for pos in ls2_positions:
         display.blit(lightStar2, pos)
+    display.blit(meteor, meteor_border)
+    display.blit(laser, laser_border)
 
-    player_border.x += player_direction * 0.4
+    player_border.x += player_direction * 0.1
     if player_border.right > WINDOW_WIDTH or player_border.left < 0:
         player_direction *= -1
     display.blit(player, player_border)
