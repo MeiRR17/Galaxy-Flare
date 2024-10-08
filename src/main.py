@@ -2,12 +2,15 @@ import pygame
 from os.path import join
 from random import randint
 
+from pygame import Clock
+
 #general setup of pygame
 pygame.init()
 WINDOW_WIDTH, WINDOW_HEIGHT = 640, 480
 display = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
 pygame.display.set_caption('Galaxy Flare')
 running = True
+clock = pygame.time.Clock()
 
 #surface
 sur = pygame.Surface((100, 200))
@@ -26,7 +29,6 @@ lightStar2 = pygame.image.load('../img/lightStar2.png').convert_alpha()
 space = pygame.image.load('../img/space.png').convert_alpha()
 
 meteor = pygame.image.load('../img/meteors/m1.png').convert_alpha()
-
 meteor_border = meteor.get_rect()
 meteor_border.center = (WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2)
 
@@ -45,6 +47,7 @@ ls1_positions = [(randint(0, WINDOW_WIDTH), randint(0, WINDOW_HEIGHT)) for i in 
 ls2_positions = [(randint(0, WINDOW_WIDTH), randint(0, WINDOW_HEIGHT)) for j in range(5)]
 
 while running:
+    Clock.tick(clock, 24)
     #event loop
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -75,9 +78,8 @@ while running:
     display.blit(meteor, meteor_border)
     display.blit(laser, laser_border)
 
-    player_border.x += player_direction * 0.1
-    if player_border.right > WINDOW_WIDTH or player_border.left < 0:
-        player_direction *= -1
+    player_border.x += 10
+    player_border.y -= 10
     display.blit(player, player_border)
 
     pygame.display.update()
